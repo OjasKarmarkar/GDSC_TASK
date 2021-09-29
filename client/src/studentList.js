@@ -1,9 +1,12 @@
 import FeatherIcon from 'feather-icons-react';
 import axios from "axios";
-
+import { useHistory } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 
 export default function StudentCard(props) {
+    const history = useHistory();
+
 
     const deleteStudent = (id, token) => {
 
@@ -11,7 +14,7 @@ export default function StudentCard(props) {
             id: id,
             token: token
         }).then((response) => {
-            if (response.status != 200) {
+            if (response.status !== 200) {
                 //window.location.reload()
                 alert(response.data['message'])
 
@@ -35,7 +38,8 @@ export default function StudentCard(props) {
                 <p className="mt-2 text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae dolores deserunt ea doloremque natus error, rerum quas odio quaerat nam ex commodi hic, suscipit in a veritatis pariatur minus consequuntur!</p>
             </div>
             <div className="flex flex-row justify-end mt-4 gap-x-4">
-                <a href="#" className="text-xl font-medium text-indigo-500"><FeatherIcon icon="edit" /></a>
+                <Link to={{ pathname: '/edit', state: { id: props.data.id, div: props.data.division, year: props.data.year ,  nm: props.data.name } }} className="text-xl font-medium text-indigo-500"><FeatherIcon icon="edit" /></Link>
+
                 <button className="text-xl font-medium text-red-500" onClick={() => deleteStudent(props.data.id, props.token)}><FeatherIcon icon="trash" /></button>
             </div>
         </div>

@@ -3,7 +3,7 @@ const express = require('express')
 var router = express.Router();
 const auth = require("../middleware/auth");
 
-router.get('/new', auth , studentController.create);
+router.post('/new', auth , studentController.create);
 router.post('/delete', auth ,  studentController.deleteById);
 router.post('/edit', auth , studentController.editById);
 router.get('/all', auth , studentController.getAll);

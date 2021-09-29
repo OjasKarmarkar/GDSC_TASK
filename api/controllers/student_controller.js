@@ -1,5 +1,6 @@
 const Student = require("../model/student");
 const jwt = require('jsonwebtoken');
+const student = require("../model/student");
 
 exports.create = async (req, res) => {
   if (!req.body.id || !req.body.name || !req.body.year || !req.body.division) {
@@ -27,7 +28,10 @@ exports.create = async (req, res) => {
 };
 
 exports.editById = async (req, res) => {
-  Student.findOne({ id: req.body.id }, function (err, studnet) {
+  Student.findOne({ id: req.body.id }, function (err, student) {
+    student.name = req.body.name
+    student.division = req.body.division
+    student.year = req.body.year
 
     student.save(function (err) {
       if (err) {
